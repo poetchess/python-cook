@@ -36,3 +36,30 @@ def is_int(val):
 
 ivals = list(filter(is_int, values))
 print('The integers are: {}'.format(ivals))
+
+
+# Solution 4: Use itertools.compress().
+# This can be useful if we try to apply the results of filtering one sequence
+#   to another related sequence.
+addresses = [
+    '5412 N CLARK',
+    '5148 N CLARK',
+    '5800 E 58TH',
+    '2122 N CLARK'
+    '5645 N RAVENSWOOD',
+    '1060 W ADDISON',
+    '4801 N BROADWAY',
+    '1039 W GRANVILLE',
+]
+
+counts = [0, 3, 10, 4, 1, 7, 6, 1]
+
+from itertools import compress
+
+# First create a boolean selector sequence that indicates which elements
+#   satisfy the desired condition.
+more5 = [n > 5 for n in counts]
+
+# compress() function picks out the items corresponding to True values.
+addr_more5 = list(compress(addresses, more5))
+print('Following stores have more than 5 products: {}'.format(addr_more5))
